@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.antony.mybasepackage.data.models.Post" />
+            type="com.app.tribewac.data.models.Post" />
 
         <variable
             name="listener"

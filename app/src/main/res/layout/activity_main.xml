@@ -9,7 +9,7 @@
 
         <variable
             name="main"
-            type="com.antony.mybasepackage.viewmodels.PostListViewModel" />
+            type="com.app.tribewac.viewmodels.PostListViewModel" />
 
         <variable
             name="isLoading"

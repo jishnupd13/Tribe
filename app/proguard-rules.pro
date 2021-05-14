@@ -31,10 +31,10 @@
 }
 
 # Change here com.yourcompany.yourpackage
--keep,includedescriptorclasses class com.antony.mybasepackage.**$$serializer { *; } # <-- change package name to your app's
--keepclassmembers class com.antony.mybasepackage.* { # <-- change package name to your app's
+-keep,includedescriptorclasses class com.app.tribewac.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.app.tribewac.* { # <-- change package name to your app's
     *** Companion;
 }
--keepclasseswithmembers class com.antony.mybasepackage.* { # <-- change package name to your app's
+-keepclasseswithmembers class com.app.tribewac.* { # <-- change package name to your app's
     kotlinx.serialization.KSerializer serializer(...);
 }
