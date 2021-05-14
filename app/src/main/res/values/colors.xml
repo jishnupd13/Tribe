@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00488A</color>
+    <color name="colorPrimaryDark">#053B6D</color>
+    <color name="colorPrimaryText">#ffffff</color>
+
+    <color name="colorSecondary">#ffbf00</color>
+    <color name="colorSecondaryDark">#c78f00</color>
+    <color name="colorSecondaryText">#000000</color>
+
+    <color name="colorBackground">#ffffff</color>
+    <color name="colorBackgroundText">#212121</color>
+
+    <color name="colorSurface">#ffffff</color>
+    <color name="colorSurfaceText">#212121</color>
+
+    <color name="colorHint">#80ffffff</color>
+    <color name="colorNavTint">#757575</color>
+    <color name="colorEditTextError">#b00020</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="textColorWhite">#FFFFFF</color>
+    <color name="textColorBlack">#000000</color>
+    <color name="colorGrey">#595858</color>
+    <color name="textColorNormal">#414141</color>
+    <color name="textColorGrey">#909090</color>
+    <color name="textColorDarkGrey">#676676</color>
+    <color name="textViewLineGrey">#B5B6B8</color>
+    <color name="textViewLineHome">#F2F4F7</color>
+    <color name="textViewLineMedium">#E6E3E3</color>
+</resources>

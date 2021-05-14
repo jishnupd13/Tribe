@@ -1,0 +1,29 @@
+image: seanghay/android-ci
+
+cache:
+  key: ${CI_PROJECT_ID}
+  paths:
+    - .gradle
+    
+before_script:
+  - export GRADLE_USER_HOME=$(pwd)/.gradle
+  - chmod +x ./gradlew
+  
+stages:
+  - build
+    
+lintDebug:
+  stage: build
+  script:
+    - ./gradlew -Pci --console=plain :app:lintDebug -PbuildDir=lint
+  artifacts:
+    paths:
+      - app/lint/reports/
+    
+assembleDebug:
+  stage: build
+  script:
+    - ./gradlew assembleDebug
+  artifacts:
+    paths:
+      - app/build/outputs/
