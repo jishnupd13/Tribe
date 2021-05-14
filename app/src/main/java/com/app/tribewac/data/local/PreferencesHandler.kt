@@ -22,4 +22,8 @@ internal constructor(@ApplicationContext private val mContext: Context) {
         get() = sharedPreference.getString("token", "") ?: ""
         set(value) = sharedPreference.edit { putString("token", value) }
 
+    var adminToken: String
+        get() = sharedPreference.getString("adminToken", "") ?: ""
+        set(value) = sharedPreference.edit { putString("adminToken", value) }
+
 }

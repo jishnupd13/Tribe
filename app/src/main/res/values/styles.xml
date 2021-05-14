@@ -23,4 +23,20 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorTribePrimary</item>
+        <item name="colorPrimaryDark">@color/colorTribePrimaryDark</item>
+        <item name="colorAccent">@color/colorTribeAccent</item>
+
+    </style>
+
+    <style name="LoginTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">#F7F7F7</item>
+        <item name="boxStrokeColor">#EAEAEA</item>
+        <item name="boxStrokeWidth">0.5dp</item>
+        <item name="colorSecondary">#AEB5C4</item>
+        <item name="android:textColorHint">#AEB5C4</item>
+        <item name="hintTextColor">#AEB5C4</item>
+    </style>
+
 </resources>

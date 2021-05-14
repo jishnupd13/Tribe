@@ -75,6 +75,8 @@ fun <A> resultLiveData(
 sealed class ResultWrapper<out T> {
     data class Success<out T>(val data: T) : ResultWrapper<T>()
     data class Failure(val message: String, val errorType: ErrorType) : ResultWrapper<Nothing>()
+    data class FailureWithBody<out T>(val data: T,val errorType: ErrorType) : ResultWrapper<T>()
+
 }
 
 enum class ErrorType {
@@ -103,7 +105,7 @@ suspend fun <T> safeApiCall(
                 "No internet",
                 ErrorType.NETWORK_ERROR
             )
-            else -> ResultWrapper.Failure("", ErrorType.UNKNOWN)
+            else -> ResultWrapper.Failure("${throwable.message}", ErrorType.UNKNOWN)
         }
     }
 }

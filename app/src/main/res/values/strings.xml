@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Tribe Wac</string>
+    <string name="log_in">Log In</string>
+    <string name="do_you_want_to_register">Do you want to <font fgcolor='>#b30000'>Register?</font></string>
+    <string name="register">Register</string>
 </resources>

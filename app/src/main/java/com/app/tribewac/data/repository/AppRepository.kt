@@ -25,4 +25,26 @@ class AppRepository @Inject constructor(
         preferencesHandler.userToken = token
     }
 
+    /** tribe create a user */
+    suspend fun getUserTokenUsingEmail(
+        grantType: String,
+        clientId: String,
+        clientSecret: String,
+        email: String
+    ) =
+        safeApiCall {
+            webService.getUserTokenUsingEmail(grantType, clientId, clientSecret, email)
+        }
+
+    /** tribe create a user */
+    suspend fun registerTribeUser(
+        userName:String,
+        name:String,
+        email:String,
+        password:String,
+        confirmPassword:String
+    )= safeApiCall {
+        webService.getTokenUserRegister(userName,name,email,password,confirmPassword)
+    }
+
 }

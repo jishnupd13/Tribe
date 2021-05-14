@@ -1,11 +1,10 @@
 package com.app.tribewac.network
 
 import com.app.tribewac.data.models.Post
+import com.app.tribewac.data.models.getmaintoken.GetAppMainTokenModel
+import com.app.tribewac.data.models.registeruser.RegisterUserResponseModel
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Tag
+import retrofit2.http.*
 
 /**
  * The interface which provides methods to get result of webservices
@@ -24,4 +23,32 @@ interface ApiInterface {
     suspend fun getList(
         @Body postRequest: Post
     ): Response<List<Post>>
+
+    /** tribe get origin token */
+    @FormUrlEncoded
+    @POST("oauth/token")
+    suspend fun getUserTokenUsingEmail(
+        @Field("grant_type") grantType:String,
+        @Field("client_id") clientId:String,
+        @Field("client_secret") clientSecret:String,
+        @Field("email") email:String,
+        @Tag authorization: AuthorizationInterceptor.AuthorizationType
+        = AuthorizationInterceptor.AuthorizationType.NONE
+    ):Response<GetAppMainTokenModel>
+
+    /** tribe create a user */
+    @FormUrlEncoded
+    @POST("users")
+    suspend fun getTokenUserRegister(
+        @Field("username") username:String,
+        @Field("name") name:String,
+        @Field("email") email:String,
+        @Field("password") password:String,
+        @Field("confirmPassword") confirmPassword:String,
+        @Tag authorization: AuthorizationInterceptor.AuthorizationType
+        = AuthorizationInterceptor.AuthorizationType.ADMIN_TOKEN
+    ):Response<RegisterUserResponseModel>
+
+
+
 }

@@ -17,11 +17,19 @@ class AuthorizationInterceptor(private val preferencesHandler: PreferencesHandle
                 .header("Authorization", "Bearer ${preferencesHandler.userToken}")
                 .build()
         }
+
+        AuthorizationType.ADMIN_TOKEN -> {
+            newBuilder()
+                .header("Authorization", "Bearer ${preferencesHandler.adminToken}")
+                .build()
+        }
+
         AuthorizationType.NONE -> this
     }
 
     enum class AuthorizationType {
         USER_TOKEN,
+        ADMIN_TOKEN,
         NONE;
 
         companion object {

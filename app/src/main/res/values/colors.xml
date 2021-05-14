@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#053B6D</color>
     <color name="colorPrimaryText">#ffffff</color>
 
+
+    <color name="colorTribePrimary">#FFFFFF</color>
+    <color name="colorTribePrimaryDark">#289238</color>
+    <color name="colorTribeAccent">#289238</color>
+
     <color name="colorSecondary">#ffbf00</color>
     <color name="colorSecondaryDark">#c78f00</color>
     <color name="colorSecondaryText">#000000</color>
