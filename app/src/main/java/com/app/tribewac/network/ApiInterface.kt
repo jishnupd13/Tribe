@@ -1,7 +1,9 @@
 package com.app.tribewac.network
 
 import com.app.tribewac.data.models.Post
+import com.app.tribewac.data.models.answersmodel.AnswersModelResponseItem
 import com.app.tribewac.data.models.createanswermodel.CreatedAnswerModel
+import com.app.tribewac.data.models.getanswers.GetAnswersModel
 import com.app.tribewac.data.models.getmaintoken.GetAppMainTokenModel
 import com.app.tribewac.data.models.questionimageupload.QuestionImageUploadModelResponse
 import com.app.tribewac.data.models.questionlists.QuestionListModelResponseItem
@@ -137,5 +139,16 @@ interface ApiInterface {
         @Tag authorization: AuthorizationInterceptor.AuthorizationType
         = AuthorizationInterceptor.AuthorizationType.USER_TOKEN
     ): Response<CreatedAnswerModel>
+
+
+    @GET("questions/{id}/answers")
+    suspend fun getAnswersOfQuestion(
+        @Path("id") id: String,
+        @Query("page") page: Int,
+        @Query("limit") limit: Int,
+        @Query("sort") sort: String,
+        @Tag authorization: AuthorizationInterceptor.AuthorizationType
+        = AuthorizationInterceptor.AuthorizationType.USER_TOKEN
+    ): Response<List<AnswersModelResponseItem>>
 
 }

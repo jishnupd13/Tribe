@@ -11,11 +11,14 @@ import androidx.navigation.fragment.findNavController
 import com.app.tribewac.R
 import com.app.tribewac.base.BaseResult
 import com.app.tribewac.data.local.PreferencesHandler
+import com.app.tribewac.data.models.answersmodel.AnswersModelResponseItem
 import com.app.tribewac.databinding.FragmentQuestionDetailsBinding
 import com.app.tribewac.utils.hide
 import com.app.tribewac.utils.show
 import com.app.tribewac.utils.showToast
 import com.app.tribewac.utils.viewBinding
+import com.app.tribewac.view.adapters.answers.AnswerAdapter
+import com.app.tribewac.view.listeners.AdapterClickListener
 import com.app.tribewac.viewmodels.QuestionDetailsViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -35,6 +38,18 @@ class QuestionDetailsFragment : Fragment(R.layout.fragment_question_details), Vi
     private var answerCount = 0
     private lateinit var preferencesHandler: PreferencesHandler
 
+    private lateinit var answerAdapter: AnswerAdapter
+
+    private var isAdapterInitialized = false
+
+    private var answerList = arrayListOf<AnswersModelResponseItem>()
+
+    private val answerClickListener =
+        object : AdapterClickListener<AnswersModelResponseItem> {
+            override fun onItemClicked(obj: AnswersModelResponseItem, position: Int) {
+            }
+        }
+
     private var userId = ""
 
 
@@ -50,8 +65,46 @@ class QuestionDetailsFragment : Fragment(R.layout.fragment_question_details), Vi
         questionId = requireArguments().getString("questionId", "")
         userId = preferencesHandler.userId
 
-        if (questionId != "")
+        answerAdapter = AnswerAdapter(answerClickListener, requireContext())
+        binding.recyclerViewAnswers.adapter = answerAdapter
+
+        if (questionId != "") {
             viewModel.getQuestionDetails(questionId)
+            viewModel.getAnswers(questionId)
+        }
+
+
+        viewModel.getQuestionAnswers.observe(requireActivity(), Observer {
+
+            when (it.status) {
+
+                BaseResult.Status.SUCCESS -> {
+
+                    if (it.data != null) {
+                        answerList = arrayListOf()
+                        answerList.addAll(it.data)
+
+                        if (isAdapterInitialized) {
+                            answerAdapter.notifyDataSetChanged()
+                        } else {
+                            answerAdapter.submitList(answerList)
+                        }
+
+
+                    }
+                }
+
+                BaseResult.Status.LOADING -> {
+
+                }
+
+                BaseResult.Status.ERROR -> {
+                    Timber.tag("errror").e("${it.message}")
+                }
+            }
+
+        })
+
 
 
         viewModel.createAnswerUsingQuestion.observe(requireActivity(), Observer {
@@ -63,10 +116,12 @@ class QuestionDetailsFragment : Fragment(R.layout.fragment_question_details), Vi
                     binding.nestedScroll.show()
                     binding.appLoader.hide()
 
-                    if(it.data!=null){
+                    if (it.data != null) {
                         answerCount += 1
                         binding.textCount.text = "$likeCount Likes and $answerCount Answers"
                         requireActivity().showToast("You Created the Answer Successfully")
+
+                        viewModel.getAnswers(questionId)
                     }
 
                 }

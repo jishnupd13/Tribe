@@ -12,4 +12,6 @@
     <string name="only_150_words_available">Only 150 words available</string>
     <string name="like">Likes</string>
     <string name="answers">Answers</string>
+    <string name="logout">Logout</string>
+    <string name="answer">Answer</string>
 </resources>

@@ -85,7 +85,7 @@ class AppRepository @Inject constructor(
         webService.createQuestion(
             title = title,
             description = description,
-            anonymous = true,
+            anonymous = false,
             from = from,
             images = images
         )
@@ -113,7 +113,11 @@ class AppRepository @Inject constructor(
     }
 
     suspend fun createAnswer(id:String,content:String)= safeApiCall {
-        webService.createAnswer(id,content,false,"new")
+        webService.createAnswer(id,content,false,"published")
+    }
+
+    suspend fun getAnswersOfQuestion(id:String)= safeApiCall {
+        webService.getAnswersOfQuestion(id,1,20,"createdAt.desc")
     }
 
 }

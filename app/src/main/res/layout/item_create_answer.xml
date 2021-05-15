@@ -38,7 +38,7 @@
             android:layout_marginBottom="14dp"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:text="@string/post_question"
+            android:text="@string/answer"
             app:backgroundTint="@color/colorTribeAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

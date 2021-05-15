@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.tribewac.base.BaseResult
 import com.app.tribewac.base.ResultWrapper
+import com.app.tribewac.data.models.answersmodel.AnswersModelResponseItem
 import com.app.tribewac.data.models.createanswermodel.CreatedAnswerModel
+import com.app.tribewac.data.models.getanswers.GetAnswersModel
 import com.app.tribewac.data.models.questionlists.QuestionListModelResponseItem
 import com.app.tribewac.data.repository.AppRepository
 import kotlinx.coroutines.launch
@@ -28,6 +30,31 @@ class QuestionDetailsViewModel @ViewModelInject constructor(
 
     val createAnswerUsingQuestion: MutableLiveData<BaseResult<CreatedAnswerModel>> =
         MutableLiveData()
+
+    val getQuestionAnswers: MutableLiveData<BaseResult<List<AnswersModelResponseItem>>> =
+        MutableLiveData()
+
+
+    fun getAnswers(questionId:String){
+
+        viewModelScope.launch {
+
+            when (val response =
+                repository.getAnswersOfQuestion(questionId)) {
+                is ResultWrapper.Success -> getQuestionAnswers.postValue(
+                    BaseResult.success(
+                        response.data
+                    )
+                )
+                is ResultWrapper.Failure -> getQuestionAnswers.postValue(
+                    BaseResult.error(
+                        response.message
+                    )
+                )
+            }
+
+        }
+    }
 
 
     fun createAnswerUsingQuestions(id: String,content:String) {
