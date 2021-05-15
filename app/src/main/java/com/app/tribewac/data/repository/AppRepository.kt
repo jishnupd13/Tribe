@@ -47,4 +47,16 @@ class AppRepository @Inject constructor(
         webService.getTokenUserRegister(userName,name,email,password,confirmPassword)
     }
 
+
+    suspend fun getUserTokenUsingEmailAndPassword(
+        grantType: String,
+        clientId: String,
+        clientSecret: String,
+        email: String,
+        password: String
+    ) =
+        safeApiCall {
+            webService.getUserTokenUsingEmailAndPassword(grantType, clientId, clientSecret, email,password)
+        }
+
 }

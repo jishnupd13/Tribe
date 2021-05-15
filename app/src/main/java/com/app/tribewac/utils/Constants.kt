@@ -9,5 +9,7 @@ const val TRIBE_CLIENT_ID = "609e3b4331912dbe82041970-il2LJdmvmY97AmnJUvWy4nccEE
 const val TRIBE_CLIENT_SECRET = "0YtNd6YAtmIYgv8iX72jvZnkKllGYHknfxAABfoG261qrWaGvW6B4jaooo4ztcdW"
 const val TRIBE_ADMIN_MAIL = "jishnu@wacmob.com"
 const val TRIBE_GRANT_TYPE = "tribe:client_secret_credentials"
+const val TRIBE_GRANT_TYPE_PASSWORD = "password"
+
 
 

@@ -50,5 +50,18 @@ interface ApiInterface {
     ):Response<RegisterUserResponseModel>
 
 
+    /** tribe get user token */
+    @FormUrlEncoded
+    @POST("oauth/token")
+    suspend fun getUserTokenUsingEmailAndPassword(
+        @Field("grant_type") grantType:String,
+        @Field("client_id") clientId:String,
+        @Field("client_secret") clientSecret:String,
+        @Field("username") email:String,
+        @Field("password") password:String,
+        @Tag authorization: AuthorizationInterceptor.AuthorizationType
+        = AuthorizationInterceptor.AuthorizationType.ADMIN_TOKEN
+    ):Response<GetAppMainTokenModel>
+
 
 }

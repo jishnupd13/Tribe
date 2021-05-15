@@ -24,9 +24,12 @@
     </style>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorTribePrimary</item>
+        <item name="colorPrimary">@color/colorTribePrimaryDark</item>
         <item name="colorPrimaryDark">@color/colorTribePrimaryDark</item>
         <item name="colorAccent">@color/colorTribeAccent</item>
+        <item name="colorPrimaryVariant">@color/colorTribeAccent</item>
+        <item name="colorSecondary">@color/colorTribeAccent</item>
+
 
     </style>
 

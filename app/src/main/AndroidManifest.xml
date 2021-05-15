@@ -17,7 +17,14 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-        <activity android:name=".view.ui.register.RegisterUserActivity"></activity>
+        <activity
+            android:name=".view.ui.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.ui.register.RegisterUserActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".view.ui.login.LoginUserActivity"
             android:screenOrientation="portrait"

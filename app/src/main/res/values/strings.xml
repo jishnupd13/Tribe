@@ -3,4 +3,9 @@
     <string name="log_in">Log In</string>
     <string name="do_you_want_to_register">Do you want to <font fgcolor='>#b30000'>Register?</font></string>
     <string name="register">Register</string>
+    <string name="home">Home</string>
+    <string name="add_question">Add Question</string>
+    <string name="account">Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
