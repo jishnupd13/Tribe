@@ -34,4 +34,6 @@
     <color name="textViewLineGrey">#B5B6B8</color>
     <color name="textViewLineHome">#F2F4F7</color>
     <color name="textViewLineMedium">#E6E3E3</color>
+    <color name="colorLightGrey">#F3EFEF</color>
+
 </resources>

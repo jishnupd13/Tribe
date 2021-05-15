@@ -35,8 +35,8 @@ object ApiModule {
         return OkHttpClient.Builder().apply {
             addInterceptor(AuthorizationInterceptor(preferencesHandler))
             addInterceptor(logging)
-            connectTimeout(30, TimeUnit.SECONDS)
-            readTimeout(30, TimeUnit.SECONDS)
+            connectTimeout(1, TimeUnit.MINUTES)
+            readTimeout(1, TimeUnit.MINUTES)
         }.build()
     }
 

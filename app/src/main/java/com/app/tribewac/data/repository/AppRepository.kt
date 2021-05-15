@@ -5,6 +5,7 @@ import com.app.tribewac.data.local.PreferencesHandler
 import com.app.tribewac.data.models.Post
 import com.app.tribewac.network.ApiInterface
 import dagger.Reusable
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 /**
@@ -38,13 +39,13 @@ class AppRepository @Inject constructor(
 
     /** tribe create a user */
     suspend fun registerTribeUser(
-        userName:String,
-        name:String,
-        email:String,
-        password:String,
-        confirmPassword:String
-    )= safeApiCall {
-        webService.getTokenUserRegister(userName,name,email,password,confirmPassword)
+        userName: String,
+        name: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ) = safeApiCall {
+        webService.getTokenUserRegister(userName, name, email, password, confirmPassword)
     }
 
 
@@ -56,7 +57,63 @@ class AppRepository @Inject constructor(
         password: String
     ) =
         safeApiCall {
-            webService.getUserTokenUsingEmailAndPassword(grantType, clientId, clientSecret, email,password)
+            webService.getUserTokenUsingEmailAndPassword(
+                grantType,
+                clientId,
+                clientSecret,
+                email,
+                password
+            )
         }
+
+    suspend fun getUserInformation(
+        email: String
+    ) = safeApiCall {
+        webService.getUserDetails(page = 1, limit = 1, sort = "createdAt.desc", email = email)
+    }
+
+    suspend fun getImageUploadUrl(part: MultipartBody.Part) = safeApiCall {
+        webService.getImageUploadUrl(part)
+    }
+
+    suspend fun createQuestionByUser(
+        title: String,
+        description: String,
+        from: String,
+        images: List<String>
+    ) = safeApiCall {
+        webService.createQuestion(
+            title = title,
+            description = description,
+            anonymous = true,
+            from = from,
+            images = images
+        )
+    }
+
+    suspend fun getQuestionsAllList(
+    ) = safeApiCall {
+        webService.getQuestionList(
+            page = 1,
+            limit = 30,
+            sort = "createdAt.desc"
+        )
+    }
+
+    suspend fun getQuestionDetails(id:String)= safeApiCall {
+        webService.getQuestionDetails(id)
+    }
+
+    suspend fun getQuestionLike(id:String)= safeApiCall {
+        webService.getQuestionLike(id)
+    }
+
+    suspend fun getQuestionUnLike(id:String)= safeApiCall {
+        webService.getQuestionUnLike(id)
+    }
+
+    suspend fun createAnswer(id:String,content:String)= safeApiCall {
+        webService.createAnswer(id,content,false,"new")
+    }
 
 }

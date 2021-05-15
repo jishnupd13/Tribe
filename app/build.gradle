@@ -95,4 +95,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+
+    //Image Croper
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 }

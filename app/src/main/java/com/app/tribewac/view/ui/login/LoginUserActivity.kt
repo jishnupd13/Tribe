@@ -36,7 +36,7 @@ class LoginUserActivity : AppCompatActivity(), View.OnClickListener {
         binding.viewModel = viewModel
         binding.listener = this
 
-        preferencesHandler= PreferencesHandler(this)
+        preferencesHandler = PreferencesHandler(this)
 
         val textToSpan: Spannable =
             SpannableString("Don't you have account? Register")
@@ -50,33 +50,34 @@ class LoginUserActivity : AppCompatActivity(), View.OnClickListener {
 
         viewModel.getUserTokenData.observe(this, Observer {
 
-            when(it.status){
+            when (it.status) {
 
-                BaseResult.Status.SUCCESS->{
+                BaseResult.Status.SUCCESS -> {
                     binding.nestedScrollView.show()
                     binding.appLoader.hide()
 
-                    if(it.data!=null){
+                    if (it.data != null) {
                         showToast("Login Successful")
-                        preferencesHandler.userToken=it.data.accessToken?:""
-                        preferencesHandler.refreshToken=it.data.refreshToken?:""
+                        preferencesHandler.userToken = it.data.accessToken ?: ""
+                        preferencesHandler.refreshToken = it.data.refreshToken ?: ""
+                        preferencesHandler.userEmail = binding.editTextUserName.text.toString()
 
-                        val homePageIntent= Intent(this,HomeActivity::class.java)
+                        val homePageIntent = Intent(this, HomeActivity::class.java)
                         startActivity(homePageIntent)
                         finish()
-                        overridePendingTransition(0,0)
+                        overridePendingTransition(0, 0)
                     }
 
                 }
 
-                BaseResult.Status.ERROR->{
+                BaseResult.Status.ERROR -> {
                     binding.nestedScrollView.show()
                     binding.appLoader.hide()
                     showToast("Invalid Email or Password")
                     Timber.tag("login error").e("${it.message}")
                 }
 
-                BaseResult.Status.LOADING->{
+                BaseResult.Status.LOADING -> {
                     binding.nestedScrollView.hide()
                     binding.appLoader.show()
                 }
@@ -86,29 +87,34 @@ class LoginUserActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        when(view){
-            binding.textRegister->{
-                val registerPageIntent= Intent(this,RegisterUserActivity::class.java)
+        when (view) {
+            binding.textRegister -> {
+                val registerPageIntent = Intent(this, RegisterUserActivity::class.java)
                 startActivity(registerPageIntent)
-                overridePendingTransition(0,0)
+                overridePendingTransition(0, 0)
             }
 
-            binding.buttonLogin->{
+            binding.buttonLogin -> {
 
                 hideKeyboard()
-                if(validate()){
-                    viewModel.getUserToken(TRIBE_GRANT_TYPE_PASSWORD, TRIBE_CLIENT_ID,
-                        TRIBE_CLIENT_SECRET,binding.editTextUserName.text.toString().trim(),binding.editPassword.text.toString().trim())
+                if (validate()) {
+                    viewModel.getUserToken(
+                        TRIBE_GRANT_TYPE_PASSWORD,
+                        TRIBE_CLIENT_ID,
+                        TRIBE_CLIENT_SECRET,
+                        binding.editTextUserName.text.toString().trim(),
+                        binding.editPassword.text.toString().trim()
+                    )
                 }
             }
         }
     }
 
-   private fun validate():Boolean{
-        if(!isEmailValid(binding.editTextUserName.text.toString())){
+    private fun validate(): Boolean {
+        if (!isEmailValid(binding.editTextUserName.text.toString())) {
             showToast("Invalid Email")
             return false
-        }else if(binding.editPassword.text.toString().length<6){
+        } else if (binding.editPassword.text.toString().length < 6) {
             showToast("Invalid Password")
             return false
         }

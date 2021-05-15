@@ -33,7 +33,7 @@ class SplashTribeActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         preferencesHandler = PreferencesHandler(this)
 
-        if (preferencesHandler.adminToken != "") {
+        if ( preferencesHandler.userToken != "") {
             lifecycleScope.launch {
                 delay(1500)
                 Intent(applicationContext, HomeActivity::class.java)

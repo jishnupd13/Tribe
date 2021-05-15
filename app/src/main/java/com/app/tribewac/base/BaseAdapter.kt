@@ -76,6 +76,10 @@ abstract class BaseAdapter<T> :
             binding.setVariable(BR.item, obj)
             binding.executePendingBindings()
         }
+
+        fun getBinding():ViewDataBinding{
+            return binding
+        }
     }
 
     abstract fun getLayoutIdForViewType(viewType: Int): Int

@@ -8,4 +8,8 @@
     <string name="account">Account</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="post_question">Post Question</string>
+    <string name="only_150_words_available">Only 150 words available</string>
+    <string name="like">Likes</string>
+    <string name="answers">Answers</string>
 </resources>

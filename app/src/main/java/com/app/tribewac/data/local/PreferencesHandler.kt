@@ -30,4 +30,12 @@ internal constructor(@ApplicationContext private val mContext: Context) {
         get() = sharedPreference.getString("refreshToken", "") ?: ""
         set(value) = sharedPreference.edit { putString("refreshToken", value) }
 
+    var userEmail: String
+        get() = sharedPreference.getString("email", "") ?: ""
+        set(value) = sharedPreference.edit { putString("email", value) }
+
+    var userId: String
+        get() = sharedPreference.getString("userId", "") ?: ""
+        set(value) = sharedPreference.edit { putString("userId", value) }
+
 }
