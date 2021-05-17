@@ -3,12 +3,14 @@ package com.app.tribewac.network
 import com.app.tribewac.data.models.Post
 import com.app.tribewac.data.models.answersmodel.AnswersModelResponseItem
 import com.app.tribewac.data.models.createanswermodel.CreatedAnswerModel
-import com.app.tribewac.data.models.getanswers.GetAnswersModel
 import com.app.tribewac.data.models.getmaintoken.GetAppMainTokenModel
 import com.app.tribewac.data.models.questionimageupload.QuestionImageUploadModelResponse
 import com.app.tribewac.data.models.questionlists.QuestionListModelResponseItem
 import com.app.tribewac.data.models.questionresponsemodel.QuestionResponseModelResponse
 import com.app.tribewac.data.models.registeruser.RegisterUserResponseModel
+import com.app.tribewac.data.models.specificuser.GetSpecificUserModel
+import com.app.tribewac.data.models.updateuser.UpdateUserRequest
+import com.app.tribewac.data.models.updateuser.UpdateUserResponse
 import com.app.tribewac.data.models.userinformation.UserInformationResponseModelItem
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -150,5 +152,16 @@ interface ApiInterface {
         @Tag authorization: AuthorizationInterceptor.AuthorizationType
         = AuthorizationInterceptor.AuthorizationType.USER_TOKEN
     ): Response<List<AnswersModelResponseItem>>
+
+    @GET("users/{id}/")
+    suspend fun getSpecificUserDetails(@Path("id") userId: String): Response<GetSpecificUserModel>
+
+    @PUT("users/{id}")
+    suspend fun getUpdateUser(
+        @Path("id") id: String,
+        @Body body:UpdateUserRequest,
+        @Tag authorization: AuthorizationInterceptor.AuthorizationType
+        = AuthorizationInterceptor.AuthorizationType.USER_TOKEN
+    ): Response<UpdateUserResponse>
 
 }

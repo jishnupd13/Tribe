@@ -1,9 +1,7 @@
 package com.app.tribewac.viewmodels
 
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.app.tribewac.base.BaseResult
 import com.app.tribewac.base.ResultWrapper
 import com.app.tribewac.data.models.questionlists.QuestionListModelResponseItem
@@ -19,8 +17,13 @@ class HomeViewModel @ViewModelInject constructor(
     val getUserInformationLiveData: MutableLiveData<BaseResult<List<UserInformationResponseModelItem>>> =
         MutableLiveData()
 
-    val getQuestionsList: MutableLiveData<BaseResult<List<QuestionListModelResponseItem>>> =
+    val _getQuestionsList: MutableLiveData<BaseResult<List<QuestionListModelResponseItem>>> =
         MutableLiveData()
+
+    val getQuestionsList: LiveData<BaseResult<List<QuestionListModelResponseItem>>> =
+     _getQuestionsList
+
+
 
 
     fun getUserToken(
@@ -47,22 +50,32 @@ class HomeViewModel @ViewModelInject constructor(
     }
 
 
-    fun getAllQuestions() {
-        viewModelScope.launch {
-            when (val response =
-                repository.getQuestionsAllList()) {
-                is ResultWrapper.Success -> getQuestionsList.postValue(
-                    BaseResult.success(
-                        response.data
-                    )
-                )
-                is ResultWrapper.Failure -> getQuestionsList.postValue(
-                    BaseResult.error(
-                        response.message
-                    )
-                )
-            }
-        }
-    }
+     fun getAllQuestions() {
+         viewModelScope.launch {
+             when (val response =
+                 repository.getQuestionsAllList()) {
+                 is ResultWrapper.Success -> _getQuestionsList.postValue(
+                     BaseResult.success(
+                         response.data
+                     )
+                 )
+                 is ResultWrapper.Failure -> _getQuestionsList.postValue(
+                     BaseResult.error(
+                         response.message
+                     )
+                 )
+             }
+         }
+     }
 
+    /*fun getAllQuestions() = liveData<BaseResult<List<QuestionListModelResponseItem>>> {
+        emit(BaseResult.loading())
+        when (val response =
+            repository.getQuestionsAllList()) {
+            is ResultWrapper.Success -> emit(BaseResult.success(response.data))
+            is ResultWrapper.Failure -> emit(BaseResult.error(response.message))
+
+        }
+    }*/
 }
+

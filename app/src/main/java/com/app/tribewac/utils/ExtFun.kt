@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.app.tribewac.view.listeners.CustomClickListener
 
 /**
@@ -72,5 +73,15 @@ inline fun <reified T : ViewDataBinding> Fragment.viewBinding(): FragViewBinder<
     return FragViewBinder {
         T::class.java.getMethod("bind", View::class.java).invoke(null, this.requireView()) as T
     }
+}
+
+fun <T> Fragment.getNavigationResult(key: String = "result") =
+    findNavController().currentBackStackEntry?.savedStateHandle?.get<T>(key)
+
+fun <T> Fragment.getNavigationResultLiveData(key: String = "result") =
+    findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<T>(key)
+
+fun <T> Fragment.setNavigationResult(result: T, key: String = "result") {
+    findNavController().previousBackStackEntry?.savedStateHandle?.set(key, result)
 }
 

@@ -60,7 +60,8 @@ class LoginUserActivity : AppCompatActivity(), View.OnClickListener {
                         showToast("Login Successful")
                         preferencesHandler.userToken = it.data.accessToken ?: ""
                         preferencesHandler.refreshToken = it.data.refreshToken ?: ""
-                        preferencesHandler.userEmail = binding.editTextUserName.text.toString()
+                        preferencesHandler.userPassword = binding.editPassword.text.toString().trim()
+                        preferencesHandler.userEmail = binding.editTextUserName.text.toString().trim()
 
                         val homePageIntent = Intent(this, HomeActivity::class.java)
                         startActivity(homePageIntent)

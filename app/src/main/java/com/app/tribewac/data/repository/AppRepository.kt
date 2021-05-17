@@ -3,6 +3,7 @@ package com.app.tribewac.data.repository
 import com.app.tribewac.base.safeApiCall
 import com.app.tribewac.data.local.PreferencesHandler
 import com.app.tribewac.data.models.Post
+import com.app.tribewac.data.models.updateuser.UpdateUserRequest
 import com.app.tribewac.network.ApiInterface
 import dagger.Reusable
 import okhttp3.MultipartBody
@@ -21,6 +22,12 @@ class AppRepository @Inject constructor(
     suspend fun getPosts() = safeApiCall { webService.getPosts() }
 
     suspend fun getList(postRequest: Post) = safeApiCall { webService.getList(postRequest) }
+
+
+    fun getUserId(): String {
+        return preferencesHandler.userId
+    }
+
 
     fun saveUserToken(token: String) {
         preferencesHandler.userToken = token
@@ -100,24 +107,32 @@ class AppRepository @Inject constructor(
         )
     }
 
-    suspend fun getQuestionDetails(id:String)= safeApiCall {
+    suspend fun getQuestionDetails(id: String) = safeApiCall {
         webService.getQuestionDetails(id)
     }
 
-    suspend fun getQuestionLike(id:String)= safeApiCall {
+    suspend fun getQuestionLike(id: String) = safeApiCall {
         webService.getQuestionLike(id)
     }
 
-    suspend fun getQuestionUnLike(id:String)= safeApiCall {
+    suspend fun getQuestionUnLike(id: String) = safeApiCall {
         webService.getQuestionUnLike(id)
     }
 
-    suspend fun createAnswer(id:String,content:String)= safeApiCall {
-        webService.createAnswer(id,content,false,"published")
+    suspend fun createAnswer(id: String, content: String) = safeApiCall {
+        webService.createAnswer(id, content, false, "published")
     }
 
-    suspend fun getAnswersOfQuestion(id:String)= safeApiCall {
-        webService.getAnswersOfQuestion(id,1,20,"createdAt.desc")
+    suspend fun getAnswersOfQuestion(id: String) = safeApiCall {
+        webService.getAnswersOfQuestion(id, 1, 20, "createdAt.desc")
+    }
+
+    suspend fun getSpecificUserDetails(id: String) = safeApiCall {
+        webService.getSpecificUserDetails(id)
+    }
+
+    suspend fun getUpdateUser(id: String, updateUser: UpdateUserRequest) = safeApiCall {
+        webService.getUpdateUser(id, updateUser)
     }
 
 }

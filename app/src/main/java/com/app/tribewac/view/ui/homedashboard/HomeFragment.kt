@@ -42,6 +42,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
             }
         }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
@@ -53,8 +54,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
         questionAdapter = QuestionAdapter(questionClickListener,requireContext())
         binding.recyclerView.adapter = questionAdapter
 
-        viewModel.getAllQuestions()
-        viewModel.getQuestionsList.observe(requireActivity(), Observer {
+
+       viewModel.getAllQuestions()
+        viewModel.getQuestionsList.observe(viewLifecycleOwner, Observer {
 
             when(it.status){
 
@@ -84,6 +86,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
             }
 
         })
+
+       /* viewModel.getQuestionsList.observe(viewLifecycleOwner){
+            it.data?.let { it1 -> questionAdapter.submitList(it1) }
+        }*/
+
     }
 
     override fun onClick(v: View?) {

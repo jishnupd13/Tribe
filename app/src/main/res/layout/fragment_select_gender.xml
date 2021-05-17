@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.app.tribewac.viewmodels.AccountViewModel" />
+            type="com.app.tribewac.viewmodels.SelectGenderViewModel" />
 
         <variable
             name="listener"
@@ -18,7 +18,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.ui.account.AccountFragment">
+        tools:context=".view.ui.selectgender.SelectGenderFragment">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_tool_bar"
@@ -31,6 +32,22 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <ImageView
+                android:id="@+id/image_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{listener::onClick}"
+                android:paddingStart="14dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="14dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/colorWhite" />
+
+
             <TextView
                 android:id="@+id/text_current_user_name"
                 android:layout_width="0dp"
@@ -38,13 +55,13 @@
                 android:layout_marginStart="14dp"
                 android:layout_marginEnd="14dp"
                 android:fontFamily="@font/open_sans_semi_bold"
-                android:text="Account"
+                android:text="Select Gender"
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/image_back"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/image_back"
+                app:layout_constraintTop_toTopOf="@+id/image_back" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -64,51 +81,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
-
-                <TextView
-                    android:id="@+id/text_update_user"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="14dp"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorBlack"
-                    android:fontFamily="@font/open_sans_semi_bold"
-                    android:text="@string/update_profile"
-                    android:paddingEnd="14dp"
-                    android:paddingStart="14dp"
-                    android:layout_marginTop="14dp"
-                    android:onClick="@{listener::onClick}"
-                    app:drawableEndCompat="@drawable/ic_arrow_right" />
-
-
-                <TextView
-                    android:id="@+id/text_log_out"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_update_user"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorBlack"
-                    android:fontFamily="@font/open_sans_semi_bold"
-                    android:text="@string/logout"
-                    android:paddingEnd="14dp"
-                    android:paddingStart="14dp"
-                    android:layout_marginTop="14dp"
-                    android:onClick="@{listener::onClick}"
-                    app:drawableEndCompat="@drawable/ic_arrow_right" />
-
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:listitem="@layout/item_gender"
+                    />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

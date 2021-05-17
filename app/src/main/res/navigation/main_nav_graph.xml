@@ -20,9 +20,34 @@
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.app.tribewac.view.ui.account.AccountFragment"
-        android:label="AccountFragment" />
+        android:label="AccountFragment" >
+
+        <action
+            android:id="@+id/action_accountFragment_to_updateUserFragment"
+            app:destination="@id/updateUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/questionDetailsFragment"
         android:name="com.app.tribewac.view.ui.questiondetails.QuestionDetailsFragment"
         android:label="QuestionDetailsFragment" />
+    <fragment
+        android:id="@+id/updateUserFragment"
+        android:name="com.app.tribewac.view.ui.updateprofile.UpdateUserFragment"
+        android:label="UpdateUserFragment" >
+        <action
+            android:id="@+id/action_updateUserFragment_to_selectGenderFragment"
+            app:destination="@id/selectGenderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectGenderFragment"
+        android:name="com.app.tribewac.view.ui.selectgender.SelectGenderFragment"
+        android:label="SelectGenderFragment" >
+        <action
+            android:id="@+id/action_selectGenderFragment_to_updateUserFragment"
+            app:destination="@id/updateUserFragment" />
+
+        <argument app:argType="string" android:name="gender" app:nullable="true"/>
+
+
+    </fragment>
 </navigation>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.app.tribewac.R
 import com.app.tribewac.data.local.PreferencesHandler
 import com.app.tribewac.databinding.FragmentAccountBinding
@@ -38,12 +39,18 @@ class AccountFragment : Fragment(R.layout.fragment_account), View.OnClickListene
                 preferencesHandler.userToken = ""
                 preferencesHandler.userEmail = ""
                 preferencesHandler.userId = ""
+                preferencesHandler.userPassword=""
+                preferencesHandler.refreshToken=""
 
                 val loginIntent = Intent(requireContext(), LoginUserActivity::class.java)
                 startActivity(loginIntent)
                 requireActivity().finish()
                 requireActivity().overridePendingTransition(0, 0)
                 requireActivity().showToast("SignOut Successfully")
+            }
+
+            binding.textUpdateUser -> {
+                findNavController().navigate(R.id.action_accountFragment_to_updateUserFragment)
             }
         }
     }

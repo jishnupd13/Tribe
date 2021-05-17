@@ -38,4 +38,8 @@ internal constructor(@ApplicationContext private val mContext: Context) {
         get() = sharedPreference.getString("userId", "") ?: ""
         set(value) = sharedPreference.edit { putString("userId", value) }
 
+    var userPassword: String
+        get() = sharedPreference.getString("password", "") ?: ""
+        set(value) = sharedPreference.edit { putString("password", value) }
+
 }
