@@ -36,6 +36,8 @@ class UpdateUserFragment : Fragment(R.layout.fragment_update_user), View.OnClick
 
     var gender = ""
 
+    var isUpdate=false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
@@ -46,8 +48,11 @@ class UpdateUserFragment : Fragment(R.layout.fragment_update_user), View.OnClick
             if (!bundle.isEmpty) {
                 gender = bundle.getString("gender", "")
                 binding.editTextGender.setText(gender)
+                isUpdate=true
             }
         }
+
+
 
     }
 
@@ -87,6 +92,9 @@ class UpdateUserFragment : Fragment(R.layout.fragment_update_user), View.OnClick
         })
 
 
+
+
+
         viewModel.getSpecificUserDetailsData?.observe(viewLifecycleOwner, Observer {
 
             when (it.status) {
@@ -95,20 +103,24 @@ class UpdateUserFragment : Fragment(R.layout.fragment_update_user), View.OnClick
                     binding.appLoader.hide()
                     binding.nestedScroll.show()
 
-                    if (it.data != null) {
+                    if(!isUpdate){
+                        if (it.data != null) {
 
-                        location = it.data.profile?.location ?: ""
-                        userName = it.data.profile?.username ?: ""
-                        name = it.data.profile?.name ?: ""
-                        gender = it.data.profile?.gender?:""
+                            location = it.data.profile?.location ?: ""
+                            userName = it.data.profile?.username ?: ""
+                            name = it.data.profile?.name ?: ""
+                            gender = it.data.profile?.gender?:""
 
-                        binding.editTextName.setText(it.data.profile?.name)
-                        binding.editTextEmail.setText(email)
-                        binding.editTextGender.setText(it.data.profile?.gender)
-                        binding.editTextLocation.setText(it.data.profile?.location)
-                        binding.editTextUserName.setText(it.data.profile?.username)
-                        binding.editTextPassword.setText(password)
+                            binding.editTextName.setText(it.data.profile?.name)
+                            binding.editTextEmail.setText(email)
+                            binding.editTextGender.setText(it.data.profile?.gender)
+                            binding.editTextLocation.setText(it.data.profile?.location)
+                            binding.editTextUserName.setText(it.data.profile?.username)
+                            binding.editTextPassword.setText(password)
+                        }
                     }
+
+
                 }
 
                 BaseResult.Status.ERROR -> {
@@ -140,7 +152,7 @@ class UpdateUserFragment : Fragment(R.layout.fragment_update_user), View.OnClick
             binding.btnRegister -> {
                 viewModel.getUpdateUser(
                     userId,
-                    UpdateUserRequest(userName, name, email, password, location, gender)
+                    UpdateUserRequest(username = userName,email = email,location = location,gender = gender,password = password,name = name)
                 )
             }
         }

@@ -90,9 +90,6 @@ class UpdateUserProfileViewModel @ViewModelInject constructor(private val reposi
                     )
                 }
             }
-
-
-
         }
     }
 
